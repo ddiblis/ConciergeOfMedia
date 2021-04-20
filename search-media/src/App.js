@@ -30,7 +30,7 @@ function App() {
   return (
     <>
       <Bar handleChange={handleChange} handleSubmit={handleSubmit}/>
-      
+
       <div className={"App-body"}>
 
       <GenerateGrid mangaList={mangaraw} websiteName={"Manga Raw"} />
