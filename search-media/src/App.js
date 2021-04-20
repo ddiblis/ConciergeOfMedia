@@ -1,42 +1,45 @@
-import { TextField, Button } from "@material-ui/core";
 import { useState } from "react";
-import { getSeries } from "./utils/api";
+import { getFast, getNelo, getRaw } from "./utils/api";
 import "./App.css";
+import GenerateGrid from "./GenerateGrid";
+import Bar from "./Bar"
 
 function App() {
-  const [site1, setSite1] = useState([]);
-  const [form, setForm] = useState({
-    seriesName: "",
-  });
-
+  const [mangaraw, setMangaraw] = useState([]);
+  const [manganelo, setManganelo] = useState([]);
+  const [mangafast, setMangafast] = useState([]);
+  const [seriesName, setSeriesName] = useState("");
+  
   const handleChange = (event) => {
-    const value = event.target.value;
-    setForm({
-      ...form,
-      [event.target.name]: value,
-    });
+    setSeriesName(event.target.value)
   };
 
   function handleSubmit(event) {
     event.preventDefault();
-    getSeries(form.seriesName).then(setSite1);
+
+    getRaw(seriesName)
+    .then(setMangaraw)
+
+    getNelo(seriesName)
+    .then(setManganelo)
+
+    getFast(seriesName)
+    .then(setMangafast)
   }
 
-  console.log(site1)
   return (
     <>
-      <form onSubmit={handleSubmit} noValidate autoComplete="off">
-        <TextField
-          id="outlined-basic"
-          label="series Name"
-          variant="outlined"
-          name="seriesName"
-          value={form.seriesName}
-          onChange={handleChange}
-        />
-        <Button type="submit" variant="contained"> Submit </Button>
-      </form>
-      {JSON.stringify(site1)}
+      <Bar handleChange={handleChange} handleSubmit={handleSubmit}/>
+      
+      <div className={"App-body"}>
+
+      <GenerateGrid mangaList={mangaraw} websiteName={"Manga Raw"} />
+
+      <GenerateGrid mangaList={manganelo} websiteName={"Manga Kakalot"} />
+
+      <GenerateGrid mangaList={mangafast} websiteName={"Manga Fast"} />
+
+      </div>
     </>
   );
 }
