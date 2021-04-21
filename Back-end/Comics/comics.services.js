@@ -59,21 +59,18 @@ async function ripFast(sn){
 }
 
 // For comicextra
-async function ripExtra(sn, list=[], num=1){
+async function ripExtra(sn, num=1){
   const seriesName = sn.replace(/-/g, '+')
   const url = `https://www.comicextra.com/comic-search?key=${seriesName}&page=${num}`
-  const { data } = await axios.get(url)
-  const $ = cheerio.load(data)
+  const resp = await axios.get(url, {validateStatus: false})
+  const $ = cheerio.load(resp.data)
 
-  if($('h3').first().text().trim().includes("Not found")){
-    return list
+  if($('h3').first().text().trim().includes("Not found") || resp.status == 404){
+    return []
   }
 
-  list.push(await Promise.all($("div.col-lg-8 div.cartoon-box").map(parsePage)))
-
-  const series = await ripExtra(seriesName, list, num += 1)
-
-  return list.flat()
+  const list = await Promise.all($("div.col-lg-8 div.cartoon-box").map(parsePage))
+  return [...list, ...(await ripExtra(seriesName, num += 1))]
 }
 
 // For viewcomics
