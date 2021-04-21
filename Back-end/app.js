@@ -7,14 +7,14 @@ const cors = require("cors");
 
 const errorHandler = require("./errors/errorHandler");
 const notFound = require("./errors/notFound");
-const mangaRouter = require("./Manga/manga.router")
+const comicsRouter = require("./Comics/comics.router")
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.use("/manga", mangaRouter);
+app.use("/comics", comicsRouter)
 
 app.use(notFound);
 app.use(errorHandler);

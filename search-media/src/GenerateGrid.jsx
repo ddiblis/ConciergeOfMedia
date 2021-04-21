@@ -32,11 +32,15 @@ export default function GenerateGrid(props) {
   const { mangaList, websiteName } = props;
   const classes = useStyles();
 
-  return (mangaList.length !== 0 ? (
+  return mangaList.length !== 0 ? (
     <>
       <h1> {websiteName}: </h1>
       <div className={classes.root}>
-        <GridList cellHeight={300} className={classes.gridList} cols={7}>
+        <GridList
+          cellHeight={300}
+          className={classes.gridList}
+          cols={mangaList.length < 7 ? mangaList.length : 7}
+        >
           {mangaList.map((series) => (
             <GridListTile key={series.series_url}>
               <img src={series.image_url} alt={series.series_name} />
@@ -54,6 +58,5 @@ export default function GenerateGrid(props) {
         </GridList>
       </div>
     </>
-  ): null
-  );
+  ) : null;
 }

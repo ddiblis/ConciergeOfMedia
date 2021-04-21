@@ -165,7 +165,7 @@ export default function PersistentDrawerLeft(props) {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            Manga
+            Comics
           </Typography>
           <div className={classes.search}>
             <form onSubmit={handleSubmit} noValidate autoComplete="off">
@@ -206,26 +206,12 @@ export default function PersistentDrawerLeft(props) {
         </div>
         <Divider />
         <List>
-          <ListItem button key={"Manga"}>
+          <ListItem button key={"Comics"}>
             <ListItemIcon>
               {" "}
               <MenuBookIcon />{" "}
             </ListItemIcon>
-            <ListItemText primary={"Manga"} />
-          </ListItem>
-          <ListItem button key={"Anime"}>
-            <ListItemIcon>
-              {" "}
-              <TheatersIcon />{" "}
-            </ListItemIcon>
-            <ListItemText primary={"Anime"} />
-          </ListItem>
-          <ListItem button key={"Western Comics"}>
-            <ListItemIcon>
-              {" "}
-              <MenuBookIcon />{" "}
-            </ListItemIcon>
-            <ListItemText primary={"Western Comics"} />
+            <ListItemText primary={"Comics"} />
           </ListItem>
           <ListItem button key={"TV & Movies"}>
             <ListItemIcon>
