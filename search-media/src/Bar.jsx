@@ -24,6 +24,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import SearchIcon from "@material-ui/icons/Search";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import TheatersIcon from "@material-ui/icons/Theaters";
+import { useHistory } from "react-router";
 
 const drawerWidth = 240;
 
@@ -136,6 +137,7 @@ export default function PersistentDrawerLeft(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const history = useHistory();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -173,7 +175,7 @@ export default function PersistentDrawerLeft(props) {
                 <SearchIcon />
               </div>
               <InputBase
-                placeholder="Search…"
+                placeholder="Series Name"
                 fullWidth={true}
                 classes={{
                   root: classes.inputRoot,
@@ -206,14 +208,22 @@ export default function PersistentDrawerLeft(props) {
         </div>
         <Divider />
         <List>
-          <ListItem button key={"Comics"}>
+          <ListItem
+            button
+            key={"Comics"}
+            onClick={() => history.push("/comics")}
+          >
             <ListItemIcon>
               {" "}
               <MenuBookIcon />{" "}
             </ListItemIcon>
             <ListItemText primary={"Comics"} />
           </ListItem>
-          <ListItem button key={"TV & Movies"}>
+          <ListItem
+            button
+            key={"TV & Movies"}
+            onClick={() => history.push("/tv")}
+          >
             <ListItemIcon>
               {" "}
               <TheatersIcon />{" "}

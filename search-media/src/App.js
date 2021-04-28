@@ -1,64 +1,75 @@
-import { useState } from "react";
-import {
-  getFast,
-  getNelo,
-  getRaw,
-  getExtra,
-  getView,
-  getToons,
-} from "./utils/api";
-import "./App.css";
-import GenerateGrid from "./GenerateGrid";
-import Bar from "./Bar";
+// import { useEffect, useState } from "react";
+// import {
+//   getFast,
+//   getNelo,
+//   getRaw,
+//   getExtra,
+//   getView,
+//   // getToons,
+// } from "./utils/api";
+// import "./App.css";
+// import GenerateGrid from "./GenerateGrid";
+// import Bar from "./Bar";
+// import DropDown from "./DropDown"
+// import { useParams } from "react-router-dom";
 
-export default function App() {
-  const [mangaraw, setMangaraw] = useState([]);
-  const [manganelo, setManganelo] = useState([]);
-  const [mangafast, setMangafast] = useState([]);
-  const [comicextra, setComicsextra] = useState([]);
-  const [viewcomics, setViewcomics] = useState([]);
-  // const [webtoons, setWebtoons] = useState([])
-  const [seriesName, setSeriesName] = useState("");
+// export default function App() {
+//   const [mangaraw, setMangaraw] = useState([]);
+//   const [manganelo, setManganelo] = useState([]);
+//   const [mangafast, setMangafast] = useState([]);
+//   const [comicextra, setComicsextra] = useState([]);
+//   const [viewcomics, setViewcomics] = useState([]);
+//   // const [webtoons, setWebtoons] = useState([])
+//   const [seriesName, setSeriesName] = useState("");
+//   const params = useParams();
 
-  const handleChange = (event) => {
-    setSeriesName(event.target.value);
-  };
+//   const handleChange = (event) => {
+//     setSeriesName(event.target.value);
+//   };
 
-  function handleSubmit(event) {
-    event.preventDefault();
+//   useEffect(() => {
+//     console.log(params)
 
-    getRaw(seriesName).then(setMangaraw);
+//   }, [setMangafast])
 
-    getNelo(seriesName).then(setManganelo);
+//   // const url = new URLSearchParams()
 
-    getFast(seriesName).then(setMangafast);
+//   // console.log(url)
 
-    getExtra(seriesName).then(setComicsextra);
+//   function handleSubmit(event) {
+//     event.preventDefault();
 
-    getView(seriesName).then(setViewcomics);
+//     getRaw(seriesName).then(setMangaraw);
 
-    // getToons(seriesName)
-    //   .then(setWebtoons)
-  }
+//     getNelo(seriesName).then(setManganelo);
 
-  return (
-    <>
-      <Bar handleChange={handleChange} handleSubmit={handleSubmit} />
+//     getFast(seriesName).then(setMangafast);
 
-      <div className={"App-body"}>
-        <GenerateGrid mangaList={mangaraw} websiteName={"Manga Raw"} />
+//     getExtra(seriesName).then(setComicsextra);
 
-        <GenerateGrid mangaList={manganelo} websiteName={"Manga Kakalot"} />
+//     getView(seriesName).then(setViewcomics);
 
-        <GenerateGrid mangaList={mangafast} websiteName={"Manga Fast"} />
+    // getToons(seriesName).then(setWebtoons)
+//   }
 
-        <GenerateGrid mangaList={comicextra} websiteName={"Comic Extra"} />
+//   return (
+//     <>
+//       <Bar handleChange={handleChange} handleSubmit={handleSubmit} />
 
-        <GenerateGrid mangaList={viewcomics} websiteName={"View Comics"} />
+//       <div className={"App-body"}>
+//       <DropDown />
+//         <GenerateGrid mangaList={mangaraw} websiteName={"Manga Raw"} />
 
-        {/* <GenerateGrid mangaList={webtoons} websiteName={"Web Toons"} /> */}
-      </div>
-    </>
-  );
-}
+//         <GenerateGrid mangaList={manganelo} websiteName={"Manga Kakalot"} />
 
+//         <GenerateGrid mangaList={mangafast} websiteName={"Manga Fast"} />
+
+//         <GenerateGrid mangaList={comicextra} websiteName={"Comic Extra"} />
+
+//         <GenerateGrid mangaList={viewcomics} websiteName={"View Comics"} />
+
+//         <GenerateGrid mangaList={webtoons} websiteName={"Web Toons"} />
+//       </div>
+//     </>
+//   );
+// }

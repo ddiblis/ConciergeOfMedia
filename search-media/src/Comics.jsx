@@ -5,12 +5,12 @@ import {
   getRaw,
   getExtra,
   getView,
-  getToons,
+  // getToons,
 } from "./utils/api";
 import "./App.css";
 import GenerateGrid from "./GenerateGrid";
 import Bar from "./Bar";
-
+import DropDown from "./DropDown";
 
 export default function Comics() {
   const [mangaraw, setMangaraw] = useState([]);
@@ -18,12 +18,29 @@ export default function Comics() {
   const [mangafast, setMangafast] = useState([]);
   const [comicextra, setComicsextra] = useState([]);
   const [viewcomics, setViewcomics] = useState([]);
-  // const [webtoons, setWebtoons] = useState([])
   const [seriesName, setSeriesName] = useState("");
+  const [genre, setGenre] = useState("")
+  const [checks, setChecks] = useState({
+    raw: true,
+    nelo: true,
+    fast: true,
+    extra: true,
+    view: true,
+  });
+  // const [webtoons, setWebtoons] = useState([])
 
   const handleChange = (event) => {
     setSeriesName(event.target.value);
   };
+
+  const handleCheckbox = (event) => {
+    console.log(checks);
+    setChecks({ ...checks, [event.target.name]: event.target.checked });
+  };
+
+  const handleRadio = (event) => {
+    setGenre(event.target.value)
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -42,22 +59,33 @@ export default function Comics() {
     //     .then(setWebtoons)
   }
 
+  const websites = [
+    { list: mangaraw, name: "Manga Raw", value: checks.raw, genre: "Eastern" },
+    { list: manganelo, name: "Manga Kakalot", value: checks.nelo, genre: "Eastern" },
+    { list: mangafast, name: "Manga Fast", value: checks.fast, genre: "Eastern" },
+    { list: comicextra, name: "Comic Extra", value: checks.extra, genre: "Western" },
+    { list: viewcomics, name: "View Comics", value: checks.view, genre: "Western" },
+  ];
+
+  if(genre !== "") {
+    websites.sort(a => a.genre === genre ? -1 : 1)
+  }
+
+  console.log(websites)
+
   return (
     <>
       <Bar handleChange={handleChange} handleSubmit={handleSubmit} />
 
       <div className={"App-body"}>
-        <GenerateGrid mangaList={mangaraw} websiteName={"Manga Raw"} />
+        <DropDown handleCheckbox={handleCheckbox} checks={checks} handleRadio={handleRadio} genre={genre} />
 
-        <GenerateGrid mangaList={manganelo} websiteName={"Manga Kakalot"} />
+        {websites.map((site) =>
+          site.value ? (
+            <GenerateGrid mangaList={site.list} websiteName={site.name} />
+          ) : null
+        )}
 
-        <GenerateGrid mangaList={mangafast} websiteName={"Manga Fast"} />
-
-        <GenerateGrid mangaList={comicextra} websiteName={"Comic Extra"} />
-
-        <GenerateGrid mangaList={viewcomics} websiteName={"View Comics"} />
-
-        {/* <GenerateGrid mangaList={webtoons} websiteName={"Web Toons"} /> */}
       </div>
     </>
   );
