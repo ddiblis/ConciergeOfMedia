@@ -19,7 +19,7 @@ export default function Comics() {
   const [comicextra, setComicsextra] = useState([]);
   const [viewcomics, setViewcomics] = useState([]);
   const [seriesName, setSeriesName] = useState("");
-  const [genre, setGenre] = useState("")
+  const [genre, setGenre] = useState("");
   const [checks, setChecks] = useState({
     raw: true,
     nelo: true,
@@ -39,53 +39,53 @@ export default function Comics() {
   };
 
   const handleRadio = (event) => {
-    setGenre(event.target.value)
-  }
+    setGenre(event.target.value);
+  };
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    getRaw(seriesName).then(setMangaraw);
+    checks.raw && getRaw(seriesName).then(setMangaraw);
 
-    getNelo(seriesName).then(setManganelo);
+    checks.nelo && getNelo(seriesName).then(setManganelo);
 
-    getFast(seriesName).then(setMangafast);
+    checks.fast && getFast(seriesName).then(setMangafast);
 
-    getExtra(seriesName).then(setComicsextra);
+    checks.extra && getExtra(seriesName).then(setComicsextra);
 
-    getView(seriesName).then(setViewcomics);
+    checks.view && getView(seriesName).then(setViewcomics);
 
     //   getToons(seriesName)
     //     .then(setWebtoons)
   }
 
   const websites = [
-    { list: mangaraw, name: "Manga Raw", value: checks.raw, genre: "Eastern" },
-    { list: manganelo, name: "Manga Kakalot", value: checks.nelo, genre: "Eastern" },
-    { list: mangafast, name: "Manga Fast", value: checks.fast, genre: "Eastern" },
-    { list: comicextra, name: "Comic Extra", value: checks.extra, genre: "Western" },
-    { list: viewcomics, name: "View Comics", value: checks.view, genre: "Western" },
+    { list: mangaraw, name: "Manga Raw", genre: "Eastern" },
+    { list: manganelo, name: "Manga Kakalot", genre: "Eastern" },
+    { list: mangafast, name: "Manga Fast", genre: "Eastern" },
+    { list: comicextra, name: "Comic Extra", genre: "Western" },
+    { list: viewcomics, name: "View Comics", genre: "Western" },
   ];
 
-  if(genre !== "") {
-    websites.sort(a => a.genre === genre ? -1 : 1)
+  if (genre !== "") {
+    websites.sort((a) => (a.genre === genre ? -1 : 1));
   }
-
-  console.log(websites)
 
   return (
     <>
       <Bar handleChange={handleChange} handleSubmit={handleSubmit} />
 
       <div className={"App-body"}>
-        <DropDown handleCheckbox={handleCheckbox} checks={checks} handleRadio={handleRadio} genre={genre} />
+        <DropDown
+          handleCheckbox={handleCheckbox}
+          checks={checks}
+          handleRadio={handleRadio}
+          genre={genre}
+        />
 
-        {websites.map((site) =>
-          site.value ? (
-            <GenerateGrid mangaList={site.list} websiteName={site.name} />
-          ) : null
-        )}
-
+        {websites.map((site, i) => (
+          <GenerateGrid key={i} mangaList={site.list} websiteName={site.name} />
+        ))}
       </div>
     </>
   );
