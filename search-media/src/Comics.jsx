@@ -10,7 +10,7 @@ import {
 import "./App.css";
 import GenerateGrid from "./GenerateGrid";
 import Bar from "./Bar";
-import DropDown from "./DropDown";
+import ComicDropDown from "./ComicDropDown";
 
 export default function Comics() {
   const [mangaraw, setMangaraw] = useState([]);
@@ -76,7 +76,7 @@ export default function Comics() {
       <Bar handleChange={handleChange} handleSubmit={handleSubmit} />
 
       <div className={"App-body"}>
-        <DropDown
+        <ComicDropDown
           handleCheckbox={handleCheckbox}
           checks={checks}
           handleRadio={handleRadio}

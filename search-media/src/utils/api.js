@@ -15,7 +15,7 @@ headers.append(
 
 export async function getRaw(seriesName, signal) {
   seriesName = seriesName.replace(/ /g, "-")
-  const url = `${API_BASE_URL}/comics/mangaraw?sn=${seriesName}`
+  const url = `${API_BASE_URL}/comics/mangaraw?sn=${seriesName}&download=false`
   const options = {
     headers,
     signal,
@@ -26,7 +26,7 @@ export async function getRaw(seriesName, signal) {
 
 export async function getNelo(seriesName, signal){
   seriesName = seriesName.replace(/ /g, "-")
-  const url = `${API_BASE_URL}/comics/manganelo?sn=${seriesName}`
+  const url = `${API_BASE_URL}/comics/manganelo?sn=${seriesName}&download=false`
   const options = {
     headers,
     signal,
@@ -37,7 +37,7 @@ export async function getNelo(seriesName, signal){
 
 export async function getFast(seriesName, signal){
   seriesName = seriesName.replace(/ /g, "-")
-  const url = `${API_BASE_URL}/comics/mangafast?sn=${seriesName}`
+  const url = `${API_BASE_URL}/comics/mangafast?sn=${seriesName}&download=false`
   const options = {
     headers,
     signal,
@@ -48,7 +48,7 @@ export async function getFast(seriesName, signal){
 
 export async function getExtra(seriesName, signal){
   seriesName = seriesName.replace(/ /g, "-")
-  const url = `${API_BASE_URL}/comics/comicextra?sn=${seriesName}`
+  const url = `${API_BASE_URL}/comics/comicextra?sn=${seriesName}&download=false`
   const options = {
     headers,
     signal,
@@ -59,7 +59,7 @@ export async function getExtra(seriesName, signal){
 
 export async function getView(seriesName, signal){
   seriesName = seriesName.replace(/ /g, "-")
-  const url = `${API_BASE_URL}/comics/viewcomics?sn=${seriesName}`
+  const url = `${API_BASE_URL}/comics/viewcomics?sn=${seriesName}&download=false`
   const options = {
     headers,
     signal,
@@ -70,7 +70,51 @@ export async function getView(seriesName, signal){
 
 export async function getToons(seriesName, signal){
   seriesName = seriesName.replace(/ /g, "-")
-  const url = `${API_BASE_URL}/comics/webtoons?sn=${seriesName}`
+  const url = `${API_BASE_URL}/comics/webtoons?sn=${seriesName}&download=false`
+  const options = {
+    headers,
+    signal,
+    mode: "cors",
+  }
+  return await (await axios.get(url, options)).data.data
+}
+
+export async function getSolar(seriesName, signal){
+  seriesName = seriesName.replace(/ /g, "-")
+  const url = `${API_BASE_URL}/tv/solarmovie?sn=${seriesName}&download=false`
+  const options = {
+    headers,
+    signal,
+    mode: "cors",
+  }
+  return await (await axios.get(url, options)).data.data
+}
+
+export async function get123(seriesName, signal){
+  seriesName = seriesName.replace(/ /g, "-")
+  const url = `${API_BASE_URL}/tv/movies123?sn=${seriesName}&download=false`
+  const options = {
+    headers,
+    signal,
+    mode: "cors",
+  }
+  return await (await axios.get(url, options)).data.data
+}
+
+export async function getKiss(seriesName, signal){
+  seriesName = seriesName.replace(/ /g, "-")
+  const url = `${API_BASE_URL}/tv/kissanime?sn=${seriesName}&download=false`
+  const options = {
+    headers,
+    signal,
+    mode: "cors",
+  }
+  return await (await axios.get(url, options)).data.data
+}
+
+export async function getHeaven(seriesName, signal){
+  seriesName = seriesName.replace(/ /g, "-")
+  const url = `${API_BASE_URL}/tv/animeheaven?sn=${seriesName}&download=false`
   const options = {
     headers,
     signal,

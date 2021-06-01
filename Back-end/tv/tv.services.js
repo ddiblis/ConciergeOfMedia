@@ -1,3 +1,6 @@
+const axios = require("axios");
+const cheerio = require("cheerio");
+
 async function ripSolar(seriesName, list=[], num=1) {
   seriesName = seriesName.replace(/-/g, "%20")
   const url = `https://ww1.solarmovie.cr/search/${seriesName}/${num}`
@@ -80,9 +83,7 @@ async function ripHeaven(seriesName, list=[], num=1) {
   const { data } = await axios.get(url)
   let $ = cheerio.load(data)
 
-
   if($("div.iep").length === 0) return list
-
 
   list.push(await Promise.all($("div.iep").map((_, a) => {
     $ = cheerio.load(a)
